@@ -5,15 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
-import promissMiddleware from "redux-promise";
-import ReduxThunk from "redux-thunk";
+import promiseMiddleware from "redux-promise";
+import { thunk } from "redux-thunk"; // 'thunk'를 명시적으로 가져옵니다.
 import Reducer from "./_reducer/index";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const createStoreWithMiddleware = applyMiddleware(
-  promissMiddleware,
-  ReduxThunk
+  promiseMiddleware,
+  thunk // 'thunk' 사용
 )(createStore);
+
 root.render(
   <Provider
     store={createStoreWithMiddleware(
@@ -25,8 +27,4 @@ root.render(
     <App />
   </Provider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 4000;
 const { User } = require("./models/User");
 const { auth } = require("./middleware/auth");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -15,6 +16,7 @@ dotenv.config();
 app.use(bodyParser.urlencoded({ extended: true })); // application/x-www-form-urlencoded
 app.use(bodyParser.json()); // application/json
 app.use(cookieParser());
+app.use(cors());
 
 // MongoDB connection
 mongoose
@@ -28,6 +30,10 @@ mongoose
 // Routes
 app.get("/", (req, res) => {
   res.send("Hello World!1243");
+});
+
+app.get("/api/hello", (req, res) => {
+  res.send("안녕하세요 ~");
 });
 
 app.post("/api/users/register", async (req, res) => {
